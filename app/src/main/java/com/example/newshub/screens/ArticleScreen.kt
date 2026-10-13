@@ -1,40 +1,41 @@
 package com.example.newshub.screens
 
-
-
+import android.widget.Toast
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment      // this was the missing one
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.unit.dp
-import androidx.navigation.NavController
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.ColorPainter
-import coil.compose.AsyncImage
-import androidx.compose.foundation.layout.height
-import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalInspectionMode
-import androidx.compose.foundation.verticalScroll
-import androidx.compose.foundation.rememberScrollState
-
-// @Composable means "this function draws part of the UI".
-// It takes navController so it can tell the app to move to a different screen.
-
+import androidx.compose.ui.platform.LocalUriHandler
+import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.navigation.NavController
+import coil.compose.AsyncImage
+import com.example.newshub.BookmarkRepository
+import com.example.newshub.SavedArticle
 
 // The name must be exactly ArticleScreen, because MainActivity calls it by this name
 @Preview(showBackground = true)
 @Composable
 fun ArticleScreen(navController: NavController? = null) {
+    // Needed to show the small "Saved!" popup
+    val context = LocalContext.current
+
     // In the preview panel show a sample article, on a device show the tapped one
     val article = if (LocalInspectionMode.current) sampleArticles.first()
     else SelectedArticle.article
@@ -99,6 +100,34 @@ fun ArticleScreen(navController: NavController? = null) {
                 }
             }
 
+            // Saves this article to the signed-in user's bookmarks in Firestore
+            Button(
+                onClick = {
+                    BookmarkRepository.saveArticle(
+                        SavedArticle(
+                            // The article has no ID of its own, so build one from its link
+                            // (or its title if there is no link). hashCode() gives a plain
+                            // number string, which is safe as a Firestore document ID.
+                            articleId = (article.url ?: article.title).hashCode().toString(),
+                            title = article.title,
+                            url = article.url ?: "",
+                            source = article.source,
+                            imageUrl = article.imageUrl ?: ""
+                        )
+                    ) { success, error ->
+                        // Runs when Firestore answers
+                        Toast.makeText(
+                            context,
+                            if (success) "Saved!" else "Failed: $error",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                },
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                Text("Save")
+            }
+
             Button(
                 onClick = { navController?.popBackStack() },
                 modifier = Modifier.padding(top = 8.dp)
@@ -108,6 +137,7 @@ fun ArticleScreen(navController: NavController? = null) {
         }
     }
 }
+
 @Composable
 fun ArticleCard(article: Article, onClick: () -> Unit) {
     Card(

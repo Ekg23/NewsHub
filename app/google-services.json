@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "12335935313",
+    "project_id": "newshub-bed26",
+    "storage_bucket": "newshub-bed26.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:12335935313:android:fbe619e91f243aa0e5ed70",
+        "android_client_info": {
+          "package_name": "com.example.newshub"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCxwD6e4I8JrJvLgq6tbzIgLgGW_gX9VDY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

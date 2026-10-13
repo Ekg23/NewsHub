@@ -8,6 +8,12 @@ News Hub is an Android app that lets you browse the latest News headlines. Users
 - Filter news by category (for example: business, technology, sports, health)
 - Profile screen where you enter a display name
 - Display name shown on the profile and home screens
+- **Authentication:** sign up, log in, and log out with email and password (Firebase Authentication).
+- **Save articles (Create):** a Save button on the article screen bookmarks an article.
+- **Saved list (Read):** the Saved articles screen shows the user's bookmarks and updates live.
+- **Mark as read and notes (Update):** tick an article as read and add or edit a note.
+- **Remove bookmarks (Delete):** delete a bookmark from the Saved screen.
+- **Per-user data:** every user sees only their own bookmarks.
 
 [Software Demo Video](https://youtu.be/76nUlRyxCUk)
 
@@ -18,6 +24,9 @@ News Hub is an Android app that lets you browse the latest News headlines. Users
 - IDE: Android Studio
 - API: NewsAPI
 - Min SDK: [e.g. 11]
+- Firebase Authentication
+- Cloud Firestore
+- Firebase BoM 34.17.0
 - Getting Started
 - Prerequisites
 - Android Studio (latest stable version)

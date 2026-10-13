@@ -3,6 +3,10 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
+
+    // Add the Google services Gradle plugin
+    id("com.google.gms.google-services")
+
 }
 
 val localProps = Properties().apply {
@@ -69,4 +73,16 @@ dependencies {
     debugImplementation(libs.androidx.compose.ui.tooling)
     implementation(libs.androidx.navigation.compose)
     implementation("io.coil-kt:coil-compose:2.7.0")
+
+    // Older BoM whose libraries match your project's Kotlin version
+    implementation(platform("com.google.firebase:firebase-bom:34.17.0"))
+
+    // Analytics (optional; you can delete this line, we don't need it)
+    implementation("com.google.firebase:firebase-analytics")
+
+    // Cloud Firestore (the database)
+    implementation("com.google.firebase:firebase-firestore")
+
+    // Firebase Authentication (email/password sign-in)
+    implementation("com.google.firebase:firebase-auth")
 }
