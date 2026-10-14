@@ -15,7 +15,7 @@ News Hub is an Android app that lets you browse the latest News headlines. Users
 - **Remove bookmarks (Delete):** delete a bookmark from the Saved screen.
 - **Per-user data:** every user sees only their own bookmarks.
 
-[Software Demo Video](https://youtu.be/76nUlRyxCUk)
+[Software Demo Video](https://youtu.be/isThpNgQqm4)
 
 # Development Environment
 
@@ -61,7 +61,7 @@ Author
 
 - [Android Studio Documentation](https://developer.android.com/develop)
 - [W3 School](https://www.w3schools.com/kotlin/index.php)
-
+- [Google FireBase Documentation] (https://firebase.google.com/)
 Geoffrey Kofi Etu, BYU Pathway
 
 Acknowledgements
